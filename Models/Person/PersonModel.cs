@@ -5,6 +5,7 @@ public class PersonModel
   public Guid Id { get; init; }
   public string Name { get; private set; }
   public int Age { get; private set; }
+  public ICollection<TransactionModel> Transactions { get; private set; } = [];
 
   // EF Core can't use the public constructor (it takes a DTO, not scalar columns),
   // so this parameterless one lets EF Core build entities from query results
@@ -45,8 +46,4 @@ public class PersonModel
     if (age < 0)
       throw new ArgumentException("Age cannot be negative.", nameof(age));
   }
-
-
-
-
 }

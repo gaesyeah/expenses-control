@@ -6,13 +6,13 @@ namespace ExpensesControl.Routes;
 
 public static class PersonRoute
 {
-  private const string RouteName = "persons";
+  private const string RouteName = "person";
 
   public static void PersonRoutes(this WebApplication app)
   {
     var route = app.MapGroup(RouteName);
 
-    route.MapPost("", async (PersonRequest req, PersonContext context) =>
+    route.MapPost("", async (PersonRequest req, ExpansesControlContext context) =>
     {
       var person = new PersonModel(req);
       await context.Persons.AddAsync(person);
@@ -21,20 +21,20 @@ public static class PersonRoute
       return Results.Created($"/{RouteName}/{person.Id}", person);
     });
 
-    route.MapGet("", async (PersonContext context) =>
+    route.MapGet("", async (ExpansesControlContext context) =>
     {
       var persons = await context.Persons.ToListAsync();
       return Results.Ok(persons);
     });
 
-    route.MapGet("{id:guid}", async (Guid id, PersonContext context) =>
+    route.MapGet("{id:guid}", async (Guid id, ExpansesControlContext context) =>
     {
       var person = await context.Persons.FindAsync(id);
       if (person == null) return Results.NotFound();
       return Results.Ok(person);
     });
 
-    route.MapPatch("{id:guid}", async (Guid id, PersonPartialRequest req, PersonContext context) =>
+    route.MapPatch("{id:guid}", async (Guid id, PersonPartialRequest req, ExpansesControlContext context) =>
     {
       var person = await context.Persons.FindAsync(id);
       if (person == null) return Results.NotFound();
@@ -45,7 +45,7 @@ public static class PersonRoute
       return Results.Ok(person);
     });
 
-    route.MapDelete("{id:guid}", async (Guid id, PersonContext context) =>
+    route.MapDelete("{id:guid}", async (Guid id, ExpansesControlContext context) =>
     {
       var person = await context.Persons.FindAsync(id);
       if (person == null) return Results.NotFound();
