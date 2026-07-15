@@ -1,4 +1,4 @@
-namespace Person.Models;
+namespace ExpensesControl.Models;
 
 public class PersonModel
 {
@@ -7,6 +7,12 @@ public class PersonModel
   private PersonModel() { Name = null!; }
   public PersonModel(PersonRequest request)
   {
+    if (string.IsNullOrWhiteSpace(request.Name))
+      throw new ArgumentException("Name cannot be empty.", nameof(request));
+
+    if (request.Age < 0)
+      throw new ArgumentException("Age cannot be negative.", nameof(request));
+
     Id = Guid.NewGuid();
     Name = request.Name;
     Age = request.Age;

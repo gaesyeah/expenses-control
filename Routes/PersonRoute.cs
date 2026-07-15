@@ -1,7 +1,7 @@
-using Person.Data;
-using Person.Models;
+using ExpensesControl.Data;
+using ExpensesControl.Models;
 
-namespace Person.Routes;
+namespace ExpensesControl.Routes;
 
 public static class PersonRoute
 {

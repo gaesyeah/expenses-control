@@ -1,7 +1,7 @@
+using ExpensesControl.Models;
 using Microsoft.EntityFrameworkCore;
-using Person.Models;
 
-namespace Person.Data;
+namespace ExpensesControl.Data;
 
 public class PersonContext : DbContext
 {

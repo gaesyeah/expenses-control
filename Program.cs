@@ -1,5 +1,6 @@
-using Person.Data;
-using Person.Routes;
+using ExpensesControl.Data;
+using ExpensesControl.Handlers;
+using ExpensesControl.Routes;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<PersonContext>();
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -18,7 +21,9 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+app.UseExceptionHandler();
+app.UseHttpsRedirection();
+
 app.PersonRoutes();
 
-app.UseHttpsRedirection();
 app.Run();
