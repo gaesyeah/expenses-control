@@ -2,23 +2,51 @@ namespace ExpensesControl.Models;
 
 public class PersonModel
 {
+  public Guid Id { get; init; }
+  public string Name { get; private set; }
+  public int Age { get; private set; }
+
   // EF Core can't use the public constructor (it takes a DTO, not scalar columns),
   // so this parameterless one lets EF Core build entities from query results
   private PersonModel() { Name = null!; }
   public PersonModel(PersonRequest request)
   {
-    if (string.IsNullOrWhiteSpace(request.Name))
-      throw new ArgumentException("Name cannot be empty.", nameof(request));
-
-    if (request.Age < 0)
-      throw new ArgumentException("Age cannot be negative.", nameof(request));
+    ValidateAge(request.Age);
+    ValidateName(request.Name);
 
     Id = Guid.NewGuid();
     Name = request.Name;
     Age = request.Age;
   }
 
-  public Guid Id { get; init; }
-  public string Name { get; private set; }
-  public int Age { get; private set; }
+  public void ChangePerson(PersonPartialRequest request)
+  {
+    if (request.Name is not null)
+    {
+      ValidateName(request.Name);
+      Name = request.Name;
+    }
+
+    if (request.Age is not null)
+    {
+      ValidateAge(request.Age.Value);
+      Age = request.Age.Value;
+    }
+  }
+
+  private static void ValidateName(string name)
+  {
+    if (string.IsNullOrWhiteSpace(name))
+      throw new ArgumentException("Name cannot be empty.", nameof(name));
+  }
+
+  private static void ValidateAge(int age)
+  {
+    if (age < 0)
+      throw new ArgumentException("Age cannot be negative.", nameof(age));
+  }
+
+
+
+
 }

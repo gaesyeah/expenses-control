@@ -20,9 +20,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
+else
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseExceptionHandler();
-app.UseHttpsRedirection();
 
 app.PersonRoutes();
 
