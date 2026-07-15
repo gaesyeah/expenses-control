@@ -15,7 +15,7 @@ public static class PersonRoute
     route.MapPost("", async (PersonRequest req, PersonContext ctx) =>
     {
       var person = new PersonModel(req);
-      await ctx.People.AddAsync(person);
+      await ctx.Persons.AddAsync(person);
       await ctx.SaveChangesAsync();
 
       return Results.Created($"/{RouteName}/{person.Id}", person);

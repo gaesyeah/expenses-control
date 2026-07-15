@@ -5,7 +5,7 @@ namespace Person.Data;
 
 public class PersonContext : DbContext
 {
-  public DbSet<PersonModel> People { get; set; }
+  public DbSet<PersonModel> Persons { get; set; }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
