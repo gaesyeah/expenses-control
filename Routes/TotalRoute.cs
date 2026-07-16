@@ -13,19 +13,14 @@ public static class TotalRoute
     route.MapGet("", async (ExpensesControlContext context) =>
     {
       var peopleTotals = await context.Persons
-              .Select(p => new PersonsTotals(
-                  p.Name,
-                  p.Transactions.Where(t => t.Type == TransactionType.Income).Sum(t => t.Value),
-                  p.Transactions.Where(t => t.Type == TransactionType.Expense).Sum(t => t.Value)))
-              .ToListAsync();
+        .Select(p => new PersonTotals(
+          p.Name,
+          p.Transactions.Where(t => t.Type == TransactionType.Income).Sum(t => t.Value),
+          p.Transactions.Where(t => t.Type == TransactionType.Expense).Sum(t => t.Value),
+          p.Transactions.Count))
+        .ToListAsync();
 
-      var totalIncome = peopleTotals.Sum(p => p.Income);
-      var totalExpense = peopleTotals.Sum(p => p.Expense);
-
-      var response = new TotalsResponse(
-              peopleTotals,
-              new TotalSummary(totalIncome, totalExpense, totalIncome - totalExpense));
-
+      var response = new TotalsResponse(peopleTotals);
       return Results.Ok(response);
     });
   }

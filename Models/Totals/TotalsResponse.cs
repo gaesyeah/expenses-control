@@ -1,10 +1,15 @@
 namespace ExpensesControl.Models;
 
-public record PersonsTotals(string Name, decimal Income, decimal Expense)
+public record Totals(decimal Income, decimal Expense, int Count)
 {
   public decimal Balance => Income - Expense;
 }
 
-public record TotalSummary(decimal Income, decimal Expense, decimal Balance);
+public record PersonTotals(string Name, decimal Income, decimal Expense, int Count)
+    : Totals(Income, Expense, Count);
 
-public record TotalsResponse(IEnumerable<PersonsTotals> People, TotalSummary Total);
+public record TotalsResponse(IEnumerable<PersonTotals> People, Totals Total)
+{
+  public TotalsResponse(IEnumerable<PersonTotals> people)
+    : this(people, new Totals(people.Sum(p => p.Income), people.Sum(p => p.Expense), people.Count())) { }
+}

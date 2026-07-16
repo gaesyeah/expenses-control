@@ -20,13 +20,13 @@ public static class TransactionRoute
       await context.Transactions.AddAsync(transaction);
       await context.SaveChangesAsync();
 
-      var response = new TransactionResponse(transaction.Id, transaction.Description, transaction.Value, transaction.Type, person.Id);
+      var response = new TransactionResponse(transaction);
       return Results.Created($"/{RouteName}/{transaction.Id}", response);
     });
 
     route.MapGet("", async (ExpensesControlContext context) =>
     {
-      var transactions = await context.Transactions.Select(t => new TransactionResponse(t.Id, t.Description, t.Value, t.Type, t.PersonId)).ToListAsync();
+      var transactions = await context.Transactions.Select(transaction => new TransactionResponse(transaction)).ToListAsync();
       return Results.Ok(transactions);
     });
   }

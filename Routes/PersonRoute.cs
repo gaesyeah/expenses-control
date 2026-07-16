@@ -18,12 +18,13 @@ public static class PersonRoute
       await context.Persons.AddAsync(person);
       await context.SaveChangesAsync();
 
-      return Results.Created($"/{RouteName}/{person.Id}", person);
+      var response = new PersonResponse(person);
+      return Results.Created($"/{RouteName}/{person.Id}", response);
     });
 
     route.MapGet("", async (ExpensesControlContext context) =>
     {
-      var persons = await context.Persons.ToListAsync();
+      var persons = await context.Persons.Select(p => new PersonResponse(p.Id, p.Name, p.Age)).ToListAsync();
       return Results.Ok(persons);
     });
 
@@ -31,7 +32,9 @@ public static class PersonRoute
     {
       var person = await context.Persons.FindAsync(id);
       if (person == null) return Results.NotFound();
-      return Results.Ok(person);
+
+      var response = new PersonResponse(person);
+      return Results.Ok(response);
     });
 
     route.MapPatch("{id:guid}", async (Guid id, PersonPartialRequest req, ExpensesControlContext context) =>
@@ -42,7 +45,8 @@ public static class PersonRoute
       person.ChangePerson(req);
       await context.SaveChangesAsync();
 
-      return Results.Ok(person);
+      var response = new PersonResponse(person);
+      return Results.Ok(response);
     });
 
     route.MapDelete("{id:guid}", async (Guid id, ExpensesControlContext context) =>
