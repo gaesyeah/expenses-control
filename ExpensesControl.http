@@ -1,6 +1,5 @@
 @ExpensesControl_HostAddress = http://localhost:5228
 
-GET {{ExpensesControl_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
