@@ -11,21 +11,22 @@ public static class TransactionRoute
   {
     var route = app.MapGroup(RouteName);
 
-    route.MapPost("", async (TransactionRequest req, ExpansesControlContext context) =>
+    route.MapPost("", async (TransactionRequest req, ExpensesControlContext context) =>
     {
       var person = await context.Persons.FindAsync(req.PersonId);
       if (person == null) return Results.NotFound();
 
-      var transaction = new TransactionModel(req);
+      var transaction = new TransactionModel(req, person);
       await context.Transactions.AddAsync(transaction);
       await context.SaveChangesAsync();
 
-      return Results.Created($"/{RouteName}/{transaction.Id}", transaction);
+      var response = new TransactionResponse(transaction.Id, transaction.Description, transaction.Value, transaction.Type, person.Id);
+      return Results.Created($"/{RouteName}/{transaction.Id}", response);
     });
 
-    route.MapGet("", async (ExpansesControlContext context) =>
+    route.MapGet("", async (ExpensesControlContext context) =>
     {
-      var transactions = await context.Transactions.ToListAsync();
+      var transactions = await context.Transactions.Select(t => new TransactionResponse(t.Id, t.Description, t.Value, t.Type, t.PersonId)).ToListAsync();
       return Results.Ok(transactions);
     });
   }

@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddScoped<ExpansesControlContext>();
+builder.Services.AddScoped<ExpensesControlContext>();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddProblemDetails();
 
@@ -29,5 +29,6 @@ app.UseExceptionHandler();
 
 app.PersonRoutes();
 app.TransactionRoutes();
+app.TotalRoutes();
 
 app.Run();

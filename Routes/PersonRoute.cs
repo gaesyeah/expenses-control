@@ -12,7 +12,7 @@ public static class PersonRoute
   {
     var route = app.MapGroup(RouteName);
 
-    route.MapPost("", async (PersonRequest req, ExpansesControlContext context) =>
+    route.MapPost("", async (PersonRequest req, ExpensesControlContext context) =>
     {
       var person = new PersonModel(req);
       await context.Persons.AddAsync(person);
@@ -21,20 +21,20 @@ public static class PersonRoute
       return Results.Created($"/{RouteName}/{person.Id}", person);
     });
 
-    route.MapGet("", async (ExpansesControlContext context) =>
+    route.MapGet("", async (ExpensesControlContext context) =>
     {
       var persons = await context.Persons.ToListAsync();
       return Results.Ok(persons);
     });
 
-    route.MapGet("{id:guid}", async (Guid id, ExpansesControlContext context) =>
+    route.MapGet("{id:guid}", async (Guid id, ExpensesControlContext context) =>
     {
       var person = await context.Persons.FindAsync(id);
       if (person == null) return Results.NotFound();
       return Results.Ok(person);
     });
 
-    route.MapPatch("{id:guid}", async (Guid id, PersonPartialRequest req, ExpansesControlContext context) =>
+    route.MapPatch("{id:guid}", async (Guid id, PersonPartialRequest req, ExpensesControlContext context) =>
     {
       var person = await context.Persons.FindAsync(id);
       if (person == null) return Results.NotFound();
@@ -45,7 +45,7 @@ public static class PersonRoute
       return Results.Ok(person);
     });
 
-    route.MapDelete("{id:guid}", async (Guid id, ExpansesControlContext context) =>
+    route.MapDelete("{id:guid}", async (Guid id, ExpensesControlContext context) =>
     {
       var person = await context.Persons.FindAsync(id);
       if (person == null) return Results.NotFound();

@@ -12,10 +12,13 @@ public class TransactionModel
   // EF Core can't use the public constructor (it takes a DTO, not scalar columns),
   // so this parameterless one lets EF Core build entities from query results
   private TransactionModel() { Description = null!; }
-  public TransactionModel(TransactionRequest request)
+  public TransactionModel(TransactionRequest request, PersonModel person)
   {
     if (!Enum.IsDefined(request.Type))
-      throw new ArgumentException("Invalid transaction type.");
+      throw new ArgumentException("Invalid transaction type.", nameof(request));
+
+    if (person.Age < 18 && request.Type != TransactionType.Expense)
+      throw new ArgumentException("Minors can only register expenses.", nameof(request));
 
     Id = Guid.NewGuid();
     Description = request.Description;

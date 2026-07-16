@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExpensesControl.Data;
 
-public class ExpansesControlContext : DbContext
+public class ExpensesControlContext : DbContext
 {
   public DbSet<PersonModel> Persons { get; set; }
   public DbSet<TransactionModel> Transactions { get; set; }
