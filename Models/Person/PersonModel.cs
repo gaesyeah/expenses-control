@@ -7,8 +7,8 @@ public class PersonModel
   public int Age { get; private set; }
   public ICollection<TransactionModel> Transactions { get; private set; } = [];
 
-  // EF Core can't use the public constructor (it takes a DTO, not scalar columns),
-  // so this parameterless one lets EF Core build entities from query results
+  // Construtor exigido pelo EF Core para montar entidades a partir do banco
+  // (o construtor público espera um PersonRequest, não colunas soltas)
   private PersonModel() { Name = null!; }
   public PersonModel(PersonRequest request)
   {

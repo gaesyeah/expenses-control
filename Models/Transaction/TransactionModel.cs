@@ -9,8 +9,8 @@ public class TransactionModel
   public Guid PersonId { get; private set; }
   public PersonModel Person { get; private set; } = null!;
 
-  // EF Core can't use the public constructor (it takes a DTO, not scalar columns),
-  // so this parameterless one lets EF Core build entities from query results
+  // Construtor exigido pelo EF Core para montar entidades a partir do banco
+  // (o construtor público espera um TransactionRequest, não colunas soltas)
   private TransactionModel() { Description = null!; }
   public TransactionModel(TransactionRequest request, PersonModel person)
   {
