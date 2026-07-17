@@ -33,8 +33,8 @@ Enquanto não há correção oficial da própria EF Core para essa dependência,
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/gaesyeah/expenses-control.git
-   cd expenses-control
+   git clone https://github.com/gaesyeah/expenses-control-back.git
+   cd expenses-control-back
    ```
 
 2. Restaure as dependências:
@@ -82,16 +82,16 @@ https://expenses-control-api.onrender.com/scalar/v1
 
 ## Endpoints principais
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `POST` | `/person` | Cadastra uma pessoa |
-| `GET` | `/person` | Lista todas as pessoas |
-| `GET` | `/person/{id}` | Busca uma pessoa por id |
-| `PATCH` | `/person/{id}` | Atualiza parcialmente uma pessoa |
-| `DELETE` | `/person/{id}` | Remove uma pessoa (e suas transações) |
-| `POST` | `/transaction` | Cadastra uma transação |
-| `GET` | `/transaction` | Lista todas as transações |
-| `GET` | `/totals` | Consulta totais por pessoa e o total geral |
+| Método   | Rota           | Descrição                                  |
+| -------- | -------------- | ------------------------------------------ |
+| `POST`   | `/person`      | Cadastra uma pessoa                        |
+| `GET`    | `/person`      | Lista todas as pessoas                     |
+| `GET`    | `/person/{id}` | Busca uma pessoa por id                    |
+| `PATCH`  | `/person/{id}` | Atualiza parcialmente uma pessoa           |
+| `DELETE` | `/person/{id}` | Remove uma pessoa (e suas transações)      |
+| `POST`   | `/transaction` | Cadastra uma transação                     |
+| `GET`    | `/transaction` | Lista todas as transações                  |
+| `GET`    | `/totals`      | Consulta totais por pessoa e o total geral |
 
 Para detalhes completos de cada endpoint (schemas, exemplos, testes ao vivo),
 consulte a documentação via Scalar.

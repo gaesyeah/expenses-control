@@ -19,8 +19,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 
-// Applies any pending EF Core migrations automatically on startup,
-// so the database schema is created/updated without manual `dotnet ef` commands.
+// Aplica automaticamente quaisquer migrações pendentes do EF Core na inicialização,
+// para que o esquema do banco de dados seja criado/atualizado sem comandos manuais do `dotnet ef`.
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ExpensesControlContext>();
@@ -29,7 +29,6 @@ using (var scope = app.Services.CreateScope())
 
 app.MapOpenApi();
 app.MapScalarApiReference();
-
 if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
