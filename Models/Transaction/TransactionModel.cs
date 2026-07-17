@@ -17,6 +17,9 @@ public class TransactionModel
     if (!Enum.IsDefined(request.Type))
       throw new ArgumentException("Invalid transaction type.", nameof(request));
 
+    if (string.IsNullOrWhiteSpace(request.Description))
+      throw new ArgumentException("Description cannot be empty.", nameof(request));
+
     if (person.Age < 18 && request.Type != TransactionType.Expense)
       throw new ArgumentException("Minors can only register expenses.", nameof(request));
 
