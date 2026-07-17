@@ -11,6 +11,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 COPY --from=build /app .
 
+RUN chown -R app:app /app
+USER app
+
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
