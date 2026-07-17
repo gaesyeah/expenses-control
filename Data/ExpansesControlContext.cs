@@ -16,6 +16,7 @@ public class ExpensesControlContext : DbContext
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+    // Deletar uma pessoa remove todas as suas transações automaticamente.
     modelBuilder.Entity<TransactionModel>()
         .HasOne(t => t.Person)
         .WithMany(p => p.Transactions)

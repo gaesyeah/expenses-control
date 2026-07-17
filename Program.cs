@@ -14,6 +14,9 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
+// Sem isso, o Scalar gerava URLs de teste em http:// mesmo com o site em
+// https:// no Render, e o navegador bloqueava a requisição por segurança.
+// Só afeta o ambiente publicado, localmente não faz diferença.
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto

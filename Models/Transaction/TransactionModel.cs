@@ -24,6 +24,6 @@ public class TransactionModel
     Description = request.Description;
     Value = request.Value;
     Type = request.Type;
-    PersonId = request.PersonId;
+    PersonId = person.Id;
   }
 }

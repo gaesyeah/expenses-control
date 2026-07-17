@@ -4,4 +4,4 @@ public record TransactionResponse(Guid Id, string Description, decimal Value, Tr
 {
   public TransactionResponse(TransactionModel transaction)
     : this(transaction.Id, transaction.Description, transaction.Value, transaction.Type, transaction.PersonId) { }
-};
+}

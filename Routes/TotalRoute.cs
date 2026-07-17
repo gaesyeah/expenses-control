@@ -10,6 +10,9 @@ public static class TotalRoute
   {
     var route = app.MapGroup("totals");
 
+    // A soma de receitas/despesas e a contagem de transações são calculadas
+    // no próprio banco (o EF Core traduz isso para SQL), evitando trazer
+    // todas as transações para a memória só para somar.
     route.MapGet("", async (ExpensesControlContext context) =>
     {
       var peopleTotals = await context.Persons

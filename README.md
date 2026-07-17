@@ -95,3 +95,12 @@ https://expenses-control-api.onrender.com/scalar/v1
 
 Para detalhes completos de cada endpoint (schemas, exemplos, testes ao vivo),
 consulte a documentação via Scalar.
+
+## Tipos de transação
+
+O campo `type`, usado no cadastro de transações, aceita os seguintes valores:
+
+| Valor | Tipo                |
+| ----- | ------------------- |
+| `1`   | Despesa (`Expense`) |
+| `2`   | Receita (`Income`)  |
