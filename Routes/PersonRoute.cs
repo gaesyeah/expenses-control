@@ -24,7 +24,7 @@ public static class PersonRoute
 
     route.MapGet("", async (ExpensesControlContext context) =>
     {
-      var persons = await context.Persons.Select(p => new PersonResponse(p.Id, p.Name, p.Age)).ToListAsync();
+      var persons = await context.Persons.Select(person => new PersonResponse(person)).ToListAsync();
       return Results.Ok(persons);
     });
 

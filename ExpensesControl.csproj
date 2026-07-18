@@ -13,8 +13,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.10" />
 
     <!--
-      Correção temporária: o EF Core Sqlite traz transitivamente uma versão
-      vulnerável do SQLitePCLRaw.lib.e_sqlite3 (CVE-2025-6965 / GHSA-2m69-gcr7-jv3q).
+      Correção temporária: o EF Core Sqlite traz uma versão vulnerável 
+      do SQLitePCLRaw.lib.e_sqlite3 (CVE-2025-6965 / GHSA-2m69-gcr7-jv3q).
       Ainda sem correção oficial do próprio EF Core: https://github.com/dotnet/efcore/issues/38257
       Remover assim que o EF Core atualizar essa dependência internamente.
     -->

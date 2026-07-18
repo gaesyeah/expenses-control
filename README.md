@@ -20,7 +20,7 @@ Permite o cadastro de pessoas e transações financeiras (receitas/despesas), co
 
 ## Segurança
 
-O EF Core Sqlite traz transitivamente uma versão vulnerável do
+O EF Core Sqlite traz uma versão vulnerável do
 `SQLitePCLRaw.lib.e_sqlite3` ([CVE-2025-6965](https://github.com/dotnet/efcore/issues/38257)).
 Enquanto não há correção oficial da própria EF Core para essa dependência, o
 `.csproj` fixa manualmente uma versão corrigida do pacote.
@@ -32,12 +32,14 @@ Enquanto não há correção oficial da própria EF Core para essa dependência,
 ## Como rodar o projeto
 
 1. Clone o repositório:
+
    ```bash
    git clone https://github.com/gaesyeah/expenses-control-back.git
    cd expenses-control-back
    ```
 
 2. Restaure as dependências:
+
    ```bash
    dotnet restore
    ```
