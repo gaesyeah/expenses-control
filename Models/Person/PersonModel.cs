@@ -43,6 +43,9 @@ public class PersonModel
 
   private static void ValidateAge(int age)
   {
+    if (age > 150)
+      throw new ArgumentException("Age cannot be greater than 150.", nameof(age));
+
     if (age < 0)
       throw new ArgumentException("Age cannot be negative.", nameof(age));
   }
