@@ -26,7 +26,7 @@ public static class TransactionRoute
 
     route.MapGet("", async (ExpensesControlContext context) =>
     {
-      var transactions = await context.Transactions.Select(transaction => new TransactionResponse(transaction)).ToListAsync();
+      var transactions = await context.Transactions.Include(t => t.Person).Select(transaction => new TransactionResponse(transaction)).ToListAsync();
       return Results.Ok(transactions);
     });
   }
