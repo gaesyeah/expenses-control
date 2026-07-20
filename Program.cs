@@ -10,7 +10,11 @@ const string CorsPolicyName = "Frontend";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
-builder.Services.AddScoped<ExpensesControlContext>();
+builder.Services.AddDbContext<ExpensesControlContext>(options =>
+{
+  options.UseNpgsql(
+    builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddCors(options =>

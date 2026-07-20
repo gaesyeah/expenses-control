@@ -5,18 +5,17 @@ namespace ExpensesControl.Data;
 
 public class ExpensesControlContext : DbContext
 {
+  public ExpensesControlContext(
+    DbContextOptions<ExpensesControlContext> options)
+    : base(options)
+  { }
+
   public DbSet<PersonModel> Persons { get; set; }
   public DbSet<TransactionModel> Transactions { get; set; }
 
-  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-  {
-    optionsBuilder.UseSqlite("Data Source=expensescontrol.sqlite");
-    base.OnConfiguring(optionsBuilder);
-  }
-
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    // Deletar uma pessoa remove todas as suas transações automaticamente.
+    // Deletar uma pessoa remove todas as suas transações
     modelBuilder.Entity<TransactionModel>()
         .HasOne(t => t.Person)
         .WithMany(p => p.Transactions)
