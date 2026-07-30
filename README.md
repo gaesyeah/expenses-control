@@ -1,6 +1,6 @@
 # ExpensesControl
 
-Sistema de controle de gastos residenciais, desenvolvido como desafio técnico de estágio em TI (Desenvolvimento).
+Sistema de controle de gastos residenciais.
 
 Permite o cadastro de pessoas e transações financeiras (receitas/despesas), com consulta de totais individuais e gerais.
 
